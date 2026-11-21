@@ -1,0 +1,59 @@
+<Window x:Class="GoogleDesktopRemake.FirstRunSetupWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Welcome to Google Desktop" Width="480" SizeToContent="Height"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent"
+        ShowInTaskbar="True">
+    <Border Margin="14" CornerRadius="8" BorderThickness="1" BorderBrush="#CCFFFFFF" Padding="12"
+            Background="{DynamicResource WindowGlass}">
+        <Border.Effect><DropShadowEffect BlurRadius="20" ShadowDepth="5" Opacity="0.6"/></Border.Effect>
+        <StackPanel>
+            <DockPanel Margin="4,0,4,8" Background="Transparent" MouseLeftButtonDown="TitleBar_Drag">
+                <Button DockPanel.Dock="Right" Content="×" Style="{StaticResource GlassButton}" Click="Cancel_Click"/>
+                <TextBlock Text="Welcome to Google Desktop" Foreground="White" FontFamily="Segoe UI"
+                           FontSize="17" FontWeight="SemiBold" VerticalAlignment="Center"/>
+            </DockPanel>
+            <Border Background="#FFF1F5FA" CornerRadius="4" Padding="14">
+                <StackPanel>
+                    <TextBlock Text="Choose your preferences for this Windows account. They are saved locally and are not included in the app file."
+                               TextWrapping="Wrap" Margin="0,0,0,12"/>
+
+                    <TextBlock Text="Sidebar color" FontWeight="SemiBold"/>
+                    <ComboBox x:Name="ThemeBox" Height="26" Margin="0,4,0,8" SelectionChanged="Theme_Changed">
+                        <ComboBoxItem Tag="Aero" Content="Aero blue"/>
+                        <ComboBoxItem Tag="Dark" Content="Dark"/>
+                        <ComboBoxItem Tag="Custom" Content="Custom color"/>
+                    </ComboBox>
+                    <StackPanel x:Name="CustomColorPanel" Orientation="Horizontal" Visibility="Collapsed" Margin="0,0,0,10">
+                        <TextBlock Text="Hex color" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                        <TextBox x:Name="CustomColorBox" Width="90" Height="24" Text="#1565B8" VerticalContentAlignment="Center"/>
+                    </StackPanel>
+
+                    <TextBlock Text="Weather location" FontWeight="SemiBold"/>
+                    <DockPanel Margin="0,4,0,0">
+                        <Button DockPanel.Dock="Right" Content="Find" Style="{StaticResource AeroButton}"
+                                Margin="8,0,0,0" Click="FindPlace_Click"/>
+                        <TextBox x:Name="PlaceBox" Height="25" VerticalContentAlignment="Center" Text="San Francisco"/>
+                    </DockPanel>
+                    <ListBox x:Name="PlaceResults" MaxHeight="110" Margin="0,5,0,0" Visibility="Collapsed"
+                             DisplayMemberPath="Display" SelectionChanged="PlaceResults_SelectionChanged"/>
+                    <TextBlock x:Name="PlaceStatus" FontSize="11" Foreground="#FF555555" Margin="0,4,0,10"
+                               Text="Search and select a city to set its weather coordinates." TextWrapping="Wrap"/>
+
+                    <TextBlock Text="Photo folder" FontWeight="SemiBold"/>
+                    <DockPanel Margin="0,4,0,0">
+                        <Button DockPanel.Dock="Right" Content="Browse..." Style="{StaticResource AeroButton}"
+                                Margin="8,0,0,0" Click="Browse_Click"/>
+                        <TextBox x:Name="FolderBox" Height="25" VerticalContentAlignment="Center"/>
+                    </DockPanel>
+
+                    <TextBlock x:Name="ErrorText" Foreground="#FFB00020" TextWrapping="Wrap" Margin="0,10,0,0"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,14,0,0">
+                        <Button Content="Start" Style="{StaticResource AeroButton}" IsDefault="True" Click="Start_Click"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </Border>
+</Window>

@@ -1,0 +1,41 @@
+<Window x:Class="GoogleDesktopRemake.FloatingNoteWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Width="176" Height="134" WindowStyle="None" AllowsTransparency="True"
+        Background="Transparent" ResizeMode="NoResize" ShowInTaskbar="False">
+    <Window.Resources>
+        <Style x:Key="NoteBtn" TargetType="Button">
+            <Setter Property="Foreground" Value="#FF7A6410"/><Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="14"/><Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="Button"><Border Background="Transparent" Padding="5,0"><ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/></Border></ControlTemplate></Setter.Value></Setter>
+            <Style.Triggers><Trigger Property="IsMouseOver" Value="True"><Setter Property="Foreground" Value="#FF2A2200"/></Trigger></Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Border Margin="0,7,0,0" CornerRadius="2" BorderThickness="1" BorderBrush="#FFB8A030">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0.3,1">
+                    <GradientStop Color="#FFFFF8A8" Offset="0"/>
+                    <GradientStop Color="#FFFFE764" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Border.Effect><DropShadowEffect BlurRadius="8" ShadowDepth="3" Opacity="0.55"/></Border.Effect>
+            <Grid Margin="8,12,8,2">
+                <Grid.RowDefinitions><RowDefinition Height="*"/><RowDefinition Height="22"/></Grid.RowDefinitions>
+                <TextBox x:Name="NoteBox" Background="Transparent" BorderThickness="0" AcceptsReturn="True"
+                         TextWrapping="Wrap" VerticalScrollBarVisibility="Hidden" FontFamily="Segoe Print, Comic Sans MS, Segoe UI"
+                         FontSize="12" Foreground="#FF1B3A8C" CaretBrush="#FF1B3A8C" SelectionBrush="#66FFAA00"/>
+                <DockPanel Grid.Row="1">
+                    <Button DockPanel.Dock="Right" Content="×" Style="{StaticResource NoteBtn}" Click="Delete_Click" ToolTip="Delete this note"/>
+                </DockPanel>
+            </Grid>
+        </Border>
+        <Grid x:Name="Pin" VerticalAlignment="Top" HorizontalAlignment="Center" Width="16" Height="16" Cursor="SizeAll"
+              ToolTip="Drag to move note" MouseLeftButtonDown="Pin_MouseLeftButtonDown">
+            <Ellipse Stroke="#FF6A0000" StrokeThickness="1">
+                <Ellipse.Fill><RadialGradientBrush GradientOrigin="0.35,0.3"><GradientStop Color="#FFFF9A8A" Offset="0"/><GradientStop Color="#FFD81E1E" Offset="0.6"/><GradientStop Color="#FF8A0A0A" Offset="1"/></RadialGradientBrush></Ellipse.Fill>
+                <Ellipse.Effect><DropShadowEffect BlurRadius="4" ShadowDepth="2" Opacity="0.6"/></Ellipse.Effect>
+            </Ellipse>
+        </Grid>
+    </Grid>
+</Window>

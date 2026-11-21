@@ -1,0 +1,134 @@
+<Window x:Class="GoogleDesktopRemake.QuickSearchWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:c="clr-namespace:GoogleDesktopRemake.Controls"
+        Title="Quick Search" Width="640" SizeToContent="Height"
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent"
+        ShowInTaskbar="False" Topmost="True" ShowActivated="True"
+        PreviewKeyDown="Window_PreviewKeyDown">
+    <Window.Resources>
+        <Style x:Key="ResultItem" TargetType="ListBoxItem">
+            <Setter Property="Foreground" Value="#FF1E2630"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border x:Name="Bd" Background="Transparent" CornerRadius="5" Margin="3,1" Padding="2">
+                            <ContentPresenter/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="#1A3A6EA8"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="{DynamicResource ButtonGlass}"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Border Margin="18" CornerRadius="12" BorderThickness="1" BorderBrush="#E6FFFFFF"
+                Background="{DynamicResource WindowGlass}">
+            <Border.Effect><DropShadowEffect BlurRadius="28" ShadowDepth="7" Opacity="0.6"/></Border.Effect>
+            <Grid>
+                <!-- glossy upper sheen -->
+                <Border Height="70" VerticalAlignment="Top" CornerRadius="11,11,0,0" IsHitTestVisible="False">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                            <GradientStop Color="#66FFFFFF" Offset="0"/>
+                            <GradientStop Color="#00FFFFFF" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+
+                <StackPanel Margin="18,12,18,14">
+                    <DockPanel Margin="2,0,2,6">
+                        <TextBlock DockPanel.Dock="Right" Text="Quick Search" Foreground="#B3FFFFFF" FontSize="11"
+                                   FontFamily="Segoe UI" VerticalAlignment="Bottom"/>
+                        <c:GoogleLogo HorizontalAlignment="Left" FontSize="24"/>
+                    </DockPanel>
+
+                    <Grid>
+                        <TextBox x:Name="Input" Style="{StaticResource AeroTextBox}" FontSize="26" Height="50"
+                                 Padding="12,0,48,0" FontFamily="Segoe UI Light" TextChanged="Input_TextChanged"/>
+                        <Canvas Width="22" Height="22" HorizontalAlignment="Right" VerticalAlignment="Center"
+                                Margin="0,0,14,0" IsHitTestVisible="False">
+                            <Ellipse Canvas.Left="1" Canvas.Top="1" Width="13" Height="13" Stroke="#FF6A7F96" StrokeThickness="2.5"/>
+                            <Line X1="11" Y1="11" X2="20" Y2="20" Stroke="#FF6A7F96" StrokeThickness="3" StrokeEndLineCap="Round"/>
+                        </Canvas>
+                    </Grid>
+
+                    <Border x:Name="ResultsPanel" Visibility="Collapsed" Margin="0,10,0,0" CornerRadius="6"
+                            Background="#FAFFFFFF" BorderThickness="1" BorderBrush="#88000000" Padding="0,3">
+                        <ListBox x:Name="ResultsList" Background="Transparent" BorderThickness="0"
+                                 ItemContainerStyle="{StaticResource ResultItem}"
+                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                 HorizontalContentAlignment="Stretch" Focusable="False"
+                                 PreviewMouseLeftButtonUp="ResultsList_Click">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="6,4">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="36"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Image x:Name="Ico" Source="{Binding Icon}" Width="32" Height="32"/>
+                                        <Border x:Name="GlyphBox" Visibility="Collapsed" Width="28" Height="28" CornerRadius="14"
+                                                BorderBrush="#BBFFFFFF" BorderThickness="1" Background="{DynamicResource ButtonGlass}">
+                                            <TextBlock Text="{Binding Glyph}" Foreground="White" FontWeight="Bold" FontSize="15"
+                                                       FontFamily="Georgia" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                        <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="8,0,0,0">
+                                            <TextBlock Text="{Binding Title}" FontSize="14" FontWeight="SemiBold"
+                                                       FontFamily="Segoe UI" TextTrimming="CharacterEllipsis"/>
+                                            <TextBlock Text="{Binding Subtitle}" FontSize="11" FontFamily="Segoe UI" TextTrimming="CharacterEllipsis">
+                                                <TextBlock.Style>
+                                                    <Style TargetType="TextBlock">
+                                                        <Setter Property="Foreground" Value="#FF2E8B2E"/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ListBoxItem}}" Value="True">
+                                                                <Setter Property="Foreground" Value="#FFD6F5D6"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </TextBlock.Style>
+                                            </TextBlock>
+                                        </StackPanel>
+                                        <TextBlock Grid.Column="2" Text="{Binding Kind}" FontSize="10" FontFamily="Segoe UI"
+                                                   VerticalAlignment="Center" Margin="10,0,4,0">
+                                            <TextBlock.Style>
+                                                <Style TargetType="TextBlock">
+                                                    <Setter Property="Foreground" Value="#FF8A97A6"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ListBoxItem}}" Value="True">
+                                                            <Setter Property="Foreground" Value="#CCFFFFFF"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBlock.Style>
+                                        </TextBlock>
+                                    </Grid>
+                                    <DataTemplate.Triggers>
+                                        <DataTrigger Binding="{Binding HasIcon}" Value="False">
+                                            <Setter TargetName="Ico" Property="Visibility" Value="Collapsed"/>
+                                            <Setter TargetName="GlyphBox" Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </DataTemplate.Triggers>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Border>
+
+                    <TextBlock x:Name="Hint" Visibility="Collapsed" Margin="0,8,0,0" HorizontalAlignment="Center"
+                               Text="↑ ↓ choose      Enter open      Esc close" FontSize="10" FontFamily="Segoe UI"
+                               Foreground="#B3FFFFFF"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
