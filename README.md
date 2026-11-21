@@ -41,14 +41,14 @@ That generated EXE includes the .NET runtime. For a GitHub Release, it can be re
 
 ## Local data and privacy
 
-The app stores settings, calendar events, and sticky notes for the current Windows account under `%AppData%\GoogleDesktopRemake`. This data is outside the project and is not included when you publish the source repository. On first launch for an account, the app offers setup for preferences such as theme, weather location, and photo folder. The **Reset all app data** setting removes that account's saved settings, events, and notes. Startup registration is a separate Windows setting and is not removed by the reset.
+The app stores settings, calendar events, and sticky notes for the current Windows account under `%AppData%\GoogleDesktopRemake`. On first launch for an account, the app offers setup for preferences such as theme, weather location, and photo folder. The **Reset all app data** setting removes that account's saved settings, events, and notes. Startup registration is a separate Windows setting and is not removed by the reset.
 
 Weather and location search use Open-Meteo (no API key). News headlines are fetched from the RSS/Atom feeds configured in Settings. Quick Search can open web searches when requested.
 
 ## Usage notes
 
 - By default, the sidebar stays on the desktop behind other windows. Enable **Keep on top** in Settings to keep it above them.
-- **Double-tap Ctrl** opens Quick Search. Turn it off under Settings > Sidebar > Behavior if it interferes with games.
+- **Double-tap Ctrl** opens Quick Search. Turn it off under Settings > Sidebar if it interferes with games.
 - Click a calendar date to view or add events.
 - Drag the red pin on a sticky note to detach it. Drag the note back over the sidebar to return it, or use its × button to delete it.
 - Desktop icon repositioning requires Windows **Auto arrange icons** to be off (right-click the desktop > View).
