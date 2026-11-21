@@ -1,0 +1,65 @@
+<UserControl x:Class="GoogleDesktopRemake.Gadgets.WeatherGadget"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Height="58">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="72"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Canvas Width="70" Height="52" VerticalAlignment="Center">
+            <Ellipse x:Name="Sun" Canvas.Left="4" Canvas.Top="0" Width="30" Height="30">
+                <Ellipse.Fill>
+                    <RadialGradientBrush GradientOrigin="0.4,0.35">
+                        <GradientStop Color="#FFFFF8B0" Offset="0"/>
+                        <GradientStop Color="#FFFFC21A" Offset="1"/>
+                    </RadialGradientBrush>
+                </Ellipse.Fill>
+                <Ellipse.Effect><DropShadowEffect Color="#FFFF9A00" BlurRadius="14" ShadowDepth="0" Opacity="0.9"/></Ellipse.Effect>
+            </Ellipse>
+            <!-- The crescent is kept as a separate state so a clear night never looks like daytime. -->
+            <Path x:Name="Moon" Canvas.Left="4" Canvas.Top="0" Visibility="Collapsed"
+                  Data="M 19,1 A 14,14 0 1 0 28,25 A 11,11 0 1 1 19,1 Z" Fill="#FFE9F5FF">
+                <Path.Effect><DropShadowEffect Color="#FF9ED8FF" BlurRadius="11" ShadowDepth="0" Opacity="0.9"/></Path.Effect>
+            </Path>
+            <Path x:Name="Cloud" Canvas.Left="10" Canvas.Top="14">
+                <Path.Data>
+                    <GeometryGroup FillRule="Nonzero">
+                        <EllipseGeometry Center="14,22" RadiusX="12" RadiusY="12"/>
+                        <EllipseGeometry Center="30,16" RadiusX="14" RadiusY="14"/>
+                        <EllipseGeometry Center="44,23" RadiusX="11" RadiusY="11"/>
+                        <RectangleGeometry Rect="14,22,30,12"/>
+                    </GeometryGroup>
+                </Path.Data>
+                <Path.Fill>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Color="#FFFFFFFF" Offset="0"/>
+                        <GradientStop Color="#FFB9CCE0" Offset="1"/>
+                    </LinearGradientBrush>
+                </Path.Fill>
+                <Path.Effect><DropShadowEffect BlurRadius="5" ShadowDepth="2" Opacity="0.5"/></Path.Effect>
+            </Path>
+            <Canvas x:Name="Rain" Visibility="Collapsed">
+                <Canvas.Effect><DropShadowEffect Color="#FF52BFFF" BlurRadius="4" ShadowDepth="0" Opacity="0.95"/></Canvas.Effect>
+                <Line X1="25" Y1="42" X2="21" Y2="52" Stroke="#FFE0F6FF" StrokeThickness="3" StrokeEndLineCap="Round"/>
+                <Line X1="36" Y1="42" X2="32" Y2="52" Stroke="#FFE0F6FF" StrokeThickness="3" StrokeEndLineCap="Round"/>
+                <Line X1="47" Y1="42" X2="43" Y2="52" Stroke="#FFE0F6FF" StrokeThickness="3" StrokeEndLineCap="Round"/>
+            </Canvas>
+            <Path x:Name="Thunder" Visibility="Collapsed" Canvas.Left="32" Canvas.Top="34"
+                  Data="M 8,0 L 0,12 L 7,12 L 3,22 L 16,7 L 9,7 L 13,0 Z" Fill="#FFFFF06A" Stroke="#FFE58B00" StrokeThickness="1">
+                <Path.Effect><DropShadowEffect Color="#FFFFB300" BlurRadius="7" ShadowDepth="0" Opacity="1"/></Path.Effect>
+            </Path>
+        </Canvas>
+
+        <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="4,0,0,0">
+            <TextBlock x:Name="CityText" Foreground="White" FontWeight="Bold" FontSize="11" FontFamily="Segoe UI">
+                <TextBlock.Effect><DropShadowEffect BlurRadius="3" ShadowDepth="1" Opacity="0.8"/></TextBlock.Effect>
+            </TextBlock>
+            <TextBlock x:Name="TempText" Text="--°" Foreground="White" FontSize="26" FontFamily="Segoe UI Light" Margin="0,-3,0,-3">
+                <TextBlock.Effect><DropShadowEffect BlurRadius="4" ShadowDepth="1" Opacity="0.8"/></TextBlock.Effect>
+            </TextBlock>
+            <TextBlock x:Name="HiLoText" Foreground="#FFDDEEFF" FontSize="9" FontFamily="Segoe UI"/>
+        </StackPanel>
+    </Grid>
+</UserControl>
