@@ -1,19 +1,48 @@
-# Google Desktop Remake (WPF, .NET 8)
+# Google Desktop Revived
 
-Open `Google Desktop Revived.slnx` in Visual Studio and press F5 to run the app.
+A Windows desktop sidebar inspired by classic desktop gadgets, with an Aero-style glass look. Built with WPF and .NET 8.
 
-For a self-contained x64 single-file Release build, publish with the `Windows-x64` profile. The output is
-`Google Desktop Revived\bin\Release\net8.0-windows\win-x64\single-file\Google Desktop Revived.exe`.
-Copy that executable to another Windows x64 PC and run it; no .NET installation is required. Each Windows account stores its own preferences under `%AppData%\GoogleDesktopRemake`, outside the executable. On the first run for a new account, choose a theme/color, weather location, and photo folder. Existing settings are preserved and do not trigger setup. Settings also lets each account add or remove the app from its own startup programs.
+## Features
 
-* Sidebar lives on the desktop below other windows by default; enable **Keep on top** in Settings to keep it above them.
-* Settings include Aero/Dark/custom themes, background opacity in the Background tab (previewed over sample wallpaper), custom multi-stop gradients, direction/position controls, background presets, and optional theme-matched Windows 7 light streaks; they also include analog/flip/segment clocks, calendar events, sticky notes, calculator, photo/news visibility, photo folder, weather, and multiple RSS/Atom feeds. Gadget settings check the current screen's measured space and reject additions that would overflow the sidebar. A second launch while the app is running displays an already-running message. **Reset all app data** removes saved settings, events, and notes for this account, then closes the app so next launch starts setup again; it leaves startup registration unchanged.
-* The news feed has smooth scroll arrows when more stories are available.
-* Drag the red pin on a sticky note to detach it as a floating note. Drag it back over the sidebar to return it, or use × to delete it; deleting the last detached note restores a blank note in the sidebar.
-* Click a calendar date to view or add events. Data is saved under %AppData%\GoogleDesktopRemake.
-* Desktop files/folders under the sidebar are moved to its left (and restored on exit). Needs "Auto arrange icons" OFF
-  (right-click desktop > View).
-* **Double-tap Ctrl** anywhere = Quick Search Box (apps, files, "Search web for ..."). Disable this shortcut in Settings > Behavior if it interferes with games.
-* The blue Aero glass tint remains darker on the left and lighter/more transparent on the right.
+- Aero blue, dark, and custom color themes; adjustable transparency, custom gradient backgrounds, presets, and optional light streaks.
+- Clock, weather, photo frame, RSS/Atom news feed, calendar, sticky notes, calculator, and quick search.
+- Optional widgets are checked against the available screen height so a selection that would overflow the sidebar is rejected.
+- Sticky notes can be detached and moved around the desktop.
+- Optional startup registration, a double-Ctrl quick-search shortcut toggle, and a reset option for this Windows account's app data.
+- The sidebar can stay on the desktop behind other windows or be configured to stay on top.
 
-Weather + city search: Open-Meteo (free, no API key).
+## Run from Visual Studio
+
+1. Install Visual Studio 2022 or newer with the **.NET desktop development** workload and a .NET 8 SDK.
+2. Open `Google Desktop Revived.slnx`.
+3. Build and run the `Google Desktop Revived` project.
+
+## Publish a single-file app
+
+The repository includes a `Windows-x64` publish profile configured for a self-contained, single-file Windows x64 release. From the repository root, run:
+
+```powershell
+dotnet publish ".\Google Desktop Revived\Google Desktop Revived.csproj" -p:PublishProfile=Windows-x64
+```
+
+The executable is written to:
+
+```text
+Google Desktop Revived\bin\Release\net8.0-windows\win-x64\single-file\Google Desktop Revived.exe
+```
+
+The published EXE includes the .NET runtime and can run on a compatible Windows x64 PC without a separate .NET installation. For downloads, attach this EXE to a GitHub Release; keep generated `bin` and `obj` build output out of the source repository.
+
+## Local data and privacy
+
+The app stores settings, calendar events, and sticky notes for the current Windows account under `%AppData%\GoogleDesktopRemake`. This data is outside the project and is not included when you publish the source repository. On first launch for an account, the app offers setup for preferences such as theme, weather location, and photo folder. The **Reset all app data** setting removes that account's saved settings, events, and notes. Startup registration is a separate Windows setting and is not removed by the reset.
+
+Weather and location search use Open-Meteo (no API key). News headlines are fetched from the RSS/Atom feeds configured in Settings. Quick Search can open web searches when requested.
+
+## Usage notes
+
+- By default, the sidebar stays on the desktop behind other windows. Enable **Keep on top** in Settings to keep it above them.
+- **Double-tap Ctrl** opens Quick Search. Turn it off under Settings > Sidebar > Behavior if it interferes with games.
+- Click a calendar date to view or add events.
+- Drag the red pin on a sticky note to detach it. Drag the note back over the sidebar to return it, or use its × button to delete it.
+- Desktop icon repositioning requires Windows **Auto arrange icons** to be off (right-click the desktop > View).
