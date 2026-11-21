@@ -1,4 +1,4 @@
-# Google Desktop Revived/Rebuilt
+# Google Desktop Revived
 
 A Windows desktop sidebar inspired by classic desktop gadgets, with an Aero-style glass look. Built with WPF and .NET 8.
 
@@ -17,7 +17,13 @@ A Windows desktop sidebar inspired by classic desktop gadgets, with an Aero-styl
 2. Open `Google Desktop Revived.slnx`.
 3. Build and run the `Google Desktop Revived` project.
 
-## Publish a single-file app
+## Download and run
+
+Download **`Google.Desktop.Rebuilt.exe`** from the latest GitHub Release and run it on a Windows 10 or Windows 11 PC with a 64-bit x64 processor. The release is a self-contained single-file app, so you do not need to install .NET separately. Internet access is optional and is used for weather, news feeds, and web searches. The sidebar is about 200 pixels wide; available screen height determines which optional widgets can fit.
+
+The GitHub **Source code (zip)** and **Source code (tar.gz)** assets are source archives, not app installers. Download the `.exe` asset to run the app.
+
+## Build and publish from source
 
 The repository includes a `Windows-x64` publish profile configured for a self-contained, single-file Windows x64 release. From the repository root, run:
 
@@ -25,13 +31,13 @@ The repository includes a `Windows-x64` publish profile configured for a self-co
 dotnet publish ".\Google Desktop Revived\Google Desktop Revived.csproj" -p:PublishProfile=Windows-x64
 ```
 
-The executable is written to:
+The generated executable is written to:
 
 ```text
-Google Desktop Revived\bin\Release\net8.0-windows\win-x64\single-file\Google.Desktop.Rebuilt.exe
+Google Desktop Revived\bin\Release\net8.0-windows\win-x64\single-file\Google Desktop Revived.exe
 ```
 
-The published EXE includes the .NET runtime and can run on a compatible Windows x64 PC without a separate .NET installation. 
+That generated EXE includes the .NET runtime. For a GitHub Release, it can be renamed to **`Google.Desktop.Rebuilt.exe`** to match the published download asset name. Keep generated `bin` and `obj` build output out of the source repository.
 
 ## Local data and privacy
 
@@ -46,3 +52,4 @@ Weather and location search use Open-Meteo (no API key). News headlines are fetc
 - Click a calendar date to view or add events.
 - Drag the red pin on a sticky note to detach it. Drag the note back over the sidebar to return it, or use its × button to delete it.
 - Desktop icon repositioning requires Windows **Auto arrange icons** to be off (right-click the desktop > View).
+
