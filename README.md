@@ -1,4 +1,4 @@
-# Google Desktop Revived
+# Google Desktop Revived/Rebuilt
 
 A Windows desktop sidebar inspired by classic desktop gadgets, with an Aero-style glass look. Built with WPF and .NET 8.
 
@@ -28,10 +28,10 @@ dotnet publish ".\Google Desktop Revived\Google Desktop Revived.csproj" -p:Publi
 The executable is written to:
 
 ```text
-Google Desktop Revived\bin\Release\net8.0-windows\win-x64\single-file\Google Desktop Revived.exe
+Google Desktop Revived\bin\Release\net8.0-windows\win-x64\single-file\Google.Desktop.Rebuilt.exe
 ```
 
-The published EXE includes the .NET runtime and can run on a compatible Windows x64 PC without a separate .NET installation. For downloads, attach this EXE to a GitHub Release; keep generated `bin` and `obj` build output out of the source repository.
+The published EXE includes the .NET runtime and can run on a compatible Windows x64 PC without a separate .NET installation. 
 
 ## Local data and privacy
 
