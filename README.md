@@ -46,7 +46,3 @@ Weather and location search use Open-Meteo (no API key). News headlines come fro
 - Drag the red pin on a sticky note to detach it. Drag the note back over the sidebar to return it, or use its × button to delete it.
 - Desktop icon repositioning requires Windows **Auto arrange icons** to be off (right-click the desktop > View).
 
-- Click a calendar date to view or add events.
-- Drag the red pin on a sticky note to detach it. Drag the note back over the sidebar to return it, or use its × button to delete it.
-- Desktop icon repositioning requires Windows **Auto arrange icons** to be off (right-click the desktop > View).
-
